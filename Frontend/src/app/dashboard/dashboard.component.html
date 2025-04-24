@@ -1,0 +1,70 @@
+<app-navbar></app-navbar>
+
+<div *ngIf="userData" class="dashboard-card">
+  <h2 class="dashboard-title">{{ userData.name }}'s Dashboard</h2>
+
+  <div class="dashboard-image-wrapper">
+    <ng-container *ngIf="userData.profileImage && !editMode; else imageInput">
+      <img [src]="'data:image/jpeg;base64,' + userData.profileImage" alt="Profile Image" class="dashboard-image" />
+    </ng-container>
+
+    <ng-template #imageInput>
+      <div *ngIf="!userData.profileImage && !editMode" class="initials-avatar">
+        {{ getUserInitials(userData.name) }}
+      </div>
+      <input *ngIf="editMode" type="file" (change)="onImageSelected($event)" />
+    </ng-template>
+  </div>
+
+  <div class="dashboard-info">
+    <div><strong>Email:</strong>
+      <span *ngIf="!editMode">{{ userData.email }}</span>
+      <input *ngIf="editMode" [(ngModel)]="userData.email" />
+    </div>
+
+    <div><strong>Name:</strong>
+      <span *ngIf="!editMode">{{ userData.name }}</span>
+      <input *ngIf="editMode" [(ngModel)]="userData.name" />
+    </div>
+
+    <div><strong>Access Role:</strong>
+      <span *ngIf="!editMode">{{ userData.role }}</span>
+    </div>
+
+    <div><strong>Date of Birth:</strong>
+      <span *ngIf="!editMode">{{ userData.dob }}</span>
+      <input *ngIf="editMode" [(ngModel)]="userData.dob" type="date" />
+    </div>
+
+    <div><strong>Gender:</strong>
+      <span *ngIf="!editMode">{{ userData.gender }}</span>
+      <select *ngIf="editMode" [(ngModel)]="userData.gender">
+        <option [selected]="userData.gender === 'Male'" value="MALE">Male</option>
+        <option [selected]="userData.gender === 'Female'" value="FEMALE">Female</option>
+      </select>
+    </div>
+
+    <div><strong>Contact Number:</strong>
+      <span *ngIf="!editMode">{{ userData.contactNumber }}</span>
+      <input *ngIf="editMode" [(ngModel)]="userData.contactNumber" />
+    </div>
+
+    <div><strong>Address:</strong>
+      <span *ngIf="!editMode">{{ userData.address }}</span>
+      <input *ngIf="editMode" [(ngModel)]="userData.address" />
+    </div>
+
+    <div><strong>Pin Code:</strong>
+      <span *ngIf="!editMode">{{ userData.pinCode }}</span>
+      <input *ngIf="editMode" [(ngModel)]="userData.pinCode" />
+    </div>
+  </div>
+
+  <div class="dashboard-actions">
+    <button class="edit-button" *ngIf="!editMode" (click)="editMode = true">Edit</button>
+    <div *ngIf="editMode">
+      <button class="save-button"  [disabled]="!selectedImageFile" (click)="saveUserData()">Save</button>
+      <button class="cancel-button" (click)="cancelEdit()">Cancel</button>
+    </div>
+  </div>
+</div>

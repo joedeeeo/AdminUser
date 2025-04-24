@@ -1,0 +1,90 @@
+<app-navbar></app-navbar>
+
+<div class="user-table-container">
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <div class="search-wrapper">
+      <i class="fas fa-search search-icon"></i>
+      <input 
+        type="text" 
+        placeholder="Search by name or email..." 
+        [(ngModel)]="searchQuery"
+        (input)="onSearch()"
+      />
+    </div>
+  </div>
+  
+  <h2 class="table-title">All User</h2>
+  <div class="table-wrapper">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Profile</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>DOB</th>
+          <th>Gender</th>
+          <th>Contact</th>
+          <th>Address</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>
+            <div class="avatar-cell">
+              <ng-container *ngIf="isValidBase64(user.profileImage); else initials">
+                <img
+                  [src]="'data:image/jpeg;base64,' + user.profileImage"
+                  alt="Profile"
+                  class="avatar-img"
+                />
+              </ng-container>
+              <ng-template #initials>
+                <div class="avatar-initials">
+                  {{ getUserInitials(user.name) }}
+                </div>
+              </ng-template>
+            </div>
+          </td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.dob }}</td>
+          <td>{{ user.gender }}</td>
+          <td>{{ user.contactNumber }}</td>
+          <td>{{ user.address }}</td>
+          <td>
+            <div class="action-buttons">
+              <button class="view-btn" (click)="viewProfile(user)">View</button>
+              <button class="delete-btn" (click)="deleteUser(user.id)">Delete</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="pagination-wrapper">
+    <button (click)="prevPage()" [disabled]="page === 0">Prev</button>
+
+    <button 
+      *ngFor="let p of [].constructor(totalPages); let i = index"
+      (click)="goToPage(i)"
+      [class.active]="i === page">
+      {{ i + 1 }}
+    </button>
+
+    <button (click)="nextPage()" [disabled]="page + 1 >= totalPages">Next</button>
+
+    <div class="page-size-selector">
+      <label for="size">Show:</label>
+      <select id="size" [(ngModel)]="size" (change)="onPageSizeChange()">
+        <option [value]="5">5</option>
+        <option [value]="10">10</option>
+        <option [value]="20">20</option>
+        <option [value]="50">50</option>
+      </select>
+      <span>entries (Total: {{ totalElements }})</span>
+    </div>
+  </div>

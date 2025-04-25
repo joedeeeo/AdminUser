@@ -54,7 +54,7 @@ public class AuthSecurityConfiguration {
 
 	@Bean
 	public UserDetailsService userDetailsService() {
-		return new AuthUserDetailsServiceImpl(); // Explicitly define the bean
+		return new AuthUserDetailsServiceImpl();
 	}
 	
 

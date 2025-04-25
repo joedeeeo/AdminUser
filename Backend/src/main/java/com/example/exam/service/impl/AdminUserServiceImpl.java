@@ -13,6 +13,10 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,6 +37,9 @@ import com.example.exam.service.AdminUserService;
 import com.example.exam.utils.JwtUtils;
 import com.example.exam.utils.Mapper;
 import com.github.javafaker.Faker;
+
+import jakarta.servlet.http.HttpServletResponse;
+
 import org.springframework.data.domain.PageImpl;
 
 @Service
@@ -221,37 +228,74 @@ public class AdminUserServiceImpl implements AdminUserService{
 
 	
 	@Override
-	  public Page<AdminUserProxy> getAllUsers(Pageable pageable) {
-		
-	    Page<AdminUser> pageOfEntities = db.findByRole(Role.USER, pageable);
+	public Page<AdminUserProxy> getAllUsers(Pageable pageable, String search) {
+	  Page<AdminUser> pageOfEntities;
 
-	    
-	    List<AdminUserProxy> proxyList = pageOfEntities.stream()
-	      .map(entity -> {
-	    	  
-	        AdminUserProxy proxy = mapper.entityToProxy(entity);
-	        File profileImageFile = new File("src/main/resources/static/profile_images/" 
-	                                          + entity.getProfileImage());
-	        
-	        System.err.println(entity.getProfileImage());
-	        
-	        try {
-	          proxy.setProfileImage(Files.readAllBytes(profileImageFile.toPath()));
-	        } catch (IOException e) {
-	          
-	        }
-	        return proxy;
-	      })
-	      .collect(Collectors.toList());
-
-	    
-	    return new PageImpl<>(
-	      proxyList,
-	      pageable,
-	      pageOfEntities.getTotalElements()
-	    );
+	  if (search == null || search.trim().isEmpty()) {
+	    pageOfEntities = db.findByRole(Role.USER, pageable);
+	  } else {
+	    pageOfEntities = db.findByRoleAndSearch(Role.USER, search, pageable);
 	  }
+
+	  List<AdminUserProxy> proxyList = pageOfEntities.stream()
+	    .map(entity -> {
+	      AdminUserProxy proxy = mapper.entityToProxy(entity);
+	      File profileImageFile = new File("src/main/resources/static/profile_images/"
+	                                       + entity.getProfileImage());
+	      try {
+	        proxy.setProfileImage(Files.readAllBytes(profileImageFile.toPath()));
+	      } catch (IOException e) {
+	        // log error if needed
+	      }
+	      return proxy;
+	    })
+	    .collect(Collectors.toList());
+
+	  return new PageImpl<>(proxyList, pageable, pageOfEntities.getTotalElements());
+	}
 	
 	
+	
+	@Override
+	public void exportUsersToExcel(HttpServletResponse response) {
+//	    try (Workbook workbook = new XSSFWorkbook()) {
+		try(Workbook workbook = new XSSFWorkbook()){
+	        List<AdminUser> users = db.findByRole(Role.USER); 
+
+	        Sheet sheet = workbook.createSheet("Users");
+
+	        // Header Row
+	        Row header = sheet.createRow(0);
+	        header.createCell(0).setCellValue("Name");
+	        header.createCell(1).setCellValue("DOB");
+	        header.createCell(2).setCellValue("Gender");
+	        header.createCell(3).setCellValue("Contact Number");
+	        header.createCell(4).setCellValue("Address");
+	        header.createCell(5).setCellValue("Pin Code");
+
+	        // Data Rows
+	        int rowNum = 1;
+	        for (AdminUser user : users) {
+	            Row row = sheet.createRow(rowNum++);
+	            row.createCell(0).setCellValue(user.getName());
+	            row.createCell(1).setCellValue(user.getDob().toString());
+	            row.createCell(2).setCellValue(user.getGender().toString());
+	            row.createCell(3).setCellValue(user.getContactNumber());
+	            row.createCell(4).setCellValue(user.getAddress());
+	            row.createCell(5).setCellValue(user.getPinCode());
+	        }
+
+	        // Set response headers
+	        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+	        response.setHeader("Content-Disposition", "attachment; filename=users.xlsx");
+
+	        workbook.write(response.getOutputStream());
+	        response.getOutputStream().flush();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+	    }
+	}
+
 	
 	}

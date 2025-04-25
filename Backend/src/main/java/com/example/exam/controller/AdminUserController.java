@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +26,7 @@ import com.example.exam.proxy.AdminUserProxy;
 import com.example.exam.service.AdminUserService;
 import com.example.exam.service.ResetPasswordService;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -94,14 +96,23 @@ public class AdminUserController {
 	}
 	
 	@GetMapping("/get-user-table/{page}/{size}")
-	  public ResponseEntity<Page<AdminUserProxy>> listUsers(
-	      @PathVariable int page,
-	      @PathVariable int size) {
-		
-	    Pageable pageable = PageRequest.of(page, size);
+	public ResponseEntity<Page<AdminUserProxy>> listUsers(
+	    @PathVariable int page,
+	    @PathVariable int size,
+	    @RequestParam(required = false) String search) {
 
-	    Page<AdminUserProxy> result = userService.getAllUsers(pageable);
-	    return ResponseEntity.ok(result);
-	  }
+	  Pageable pageable = PageRequest.of(page, size);
+	  Page<AdminUserProxy> result = userService.getAllUsers(pageable, search);
+	  return ResponseEntity.ok(result);
+	}
+	
+	
+	@GetMapping("/download-users-excel")
+	public void downloadUsersExcel(HttpServletResponse response) {
+	    userService.exportUsersToExcel(response);
+	}
+
+	
+	
 	
 }

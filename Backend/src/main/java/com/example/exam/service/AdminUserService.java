@@ -11,6 +11,8 @@ import com.example.exam.dto.LoginRequest;
 import com.example.exam.dto.LoginResponse;
 import com.example.exam.proxy.AdminUserProxy;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 
 public interface AdminUserService {
 	
@@ -21,6 +23,9 @@ public interface AdminUserService {
 	public List<AdminUserProxy> getAllUsersWithName(String name);
 	public Boolean addDummyData(Integer count);
 	public Boolean deleteUser(Long id);
-	Page<AdminUserProxy> getAllUsers(Pageable pageable);
+	Page<AdminUserProxy> getAllUsers(Pageable pageable, String search);
 	
+	
+	void exportUsersToExcel(HttpServletResponse response);
+
 }

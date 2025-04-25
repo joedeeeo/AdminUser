@@ -192,3 +192,162 @@
   padding: 0.3rem 0.5rem;
   border-radius: 6px;
 }
+
+
+button {
+  background: linear-gradient(135deg, #30423133, #81c784);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.5);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+
+.page-size-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #e0e5ec;
+  padding: 12px 20px;
+  border-radius: 20px;
+  box-shadow: 8px 8px 16px #bec4d1, -8px -8px 16px #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 1rem;
+  max-width: fit-content;
+}
+
+.page-size-selector label {
+  font-weight: 600;
+  color: #555;
+}
+
+.page-size-selector select {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 12px;
+  background: #e0e5ec;
+  box-shadow: inset 3px 3px 6px #bec4d1, inset -3px -3px 6px #ffffff;
+  font-size: 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.page-size-selector select:focus {
+  outline: none;
+  box-shadow: inset 2px 2px 5px #bec4d1, inset -2px -2px 5px #ffffff;
+}
+
+.page-size-selector span {
+  font-size: 13px;
+  color: #777;
+}
+
+.page-size-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.15);
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2e7d32;
+  max-width: fit-content;
+  transition: all 0.3s ease;
+}
+
+.page-size-selector label {
+  color: #2e7d32;
+}
+
+.page-size-selector select {
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.page-size-selector select:hover {
+  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.5);
+  transform: translateY(-2px);
+}
+
+.page-size-selector select:active {
+  transform: scale(0.98);
+}
+
+.page-size-selector span {
+  color: #4a4a4a;
+  font-size: 13px;
+}
+
+
+.page-size-selector select {
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.page-size-selector select:hover {
+  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.5);
+  transform: translateY(-2px);
+}
+
+.page-size-selector select:active {
+  transform: scale(0.98);
+}
+
+/* Add custom styling for option elements */
+.page-size-selector select option {
+  background-color: #388e3c;
+  color: white;
+  font-weight: 500;
+  padding: 8px 12px;
+}
+
+.page-size-selector select option:hover {
+  background-color: #66bb6a;
+}

@@ -45,7 +45,7 @@ export class UserService {
     if (search && search.trim() !== '') {
       params = params.set('search', search);
     }
-  
+    
     return this.http.get<UserPageResponse>('http://localhost:8080/get-user-table/' + page + '/' + size, { params });
   }
 
@@ -65,4 +65,11 @@ export class UserService {
     return this.http.put<boolean>('http://localhost:8080/update-user-data', formData);
   }
 
+
+  downloadUserExcel(): Observable<Blob> {
+    return this.http.get('http://localhost:8080/download-users-excel', {
+      responseType: 'blob'
+    });
+  }
+  
 }

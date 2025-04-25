@@ -24,7 +24,7 @@ export class TableComponent implements OnInit {
   }
 
   onSearch(): void {
-  this.page = 0; // reset to first page
+  this.page = 0; 
   this.loadUsers();
 }
 
@@ -54,7 +54,7 @@ export class TableComponent implements OnInit {
         next: (res) => {
           if (res) {
             alert('User deleted successfully.');
-            this.loadUsers(); // refresh the table
+            this.loadUsers();
           } else {
             alert('Failed to delete user.');
           }
@@ -96,4 +96,21 @@ export class TableComponent implements OnInit {
     this.page = 0;
     this.loadUsers();
   }
+
+  downloadExcel(): void {
+    this.userService.downloadUserExcel().subscribe({
+      next: (blob) => {
+        const a = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        a.href = url;
+        a.download = 'users.xlsx';
+        a.click();
+        URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        console.error('Error downloading Excel:', err);
+      }
+    });
+  }
+  
 }

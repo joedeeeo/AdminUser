@@ -1,0 +1,53 @@
+.dummy-card {
+    max-width: 500px;
+    margin: 3rem auto;
+    padding: 2rem;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #1e1e2f, #12121c);
+    border: 1px solid #2c2c3e;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: #f0f0f0;
+    text-align: center;
+  }
+  
+  .dummy-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #00c3ff;
+    margin-bottom: 1.5rem;
+  }
+  
+  .dummy-card input[type="number"] {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 10px;
+    border: none;
+    background-color: #262636;
+    color: #f0f0f0;
+    font-size: 1rem;
+    box-shadow: inset 2px 2px 4px #1a1a2a, inset -2px -2px 4px #33334d;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+  }
+  
+  .dummy-card input:focus {
+    outline: none;
+    box-shadow: 0 0 8px #00f7ff88;
+  }
+  
+  .dummy-card button {
+    padding: 0.6rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    border: none;
+    background: linear-gradient(to right, #4caf50, #81c784);
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0 5px 12px rgba(76, 175, 80, 0.25);
+  }
+  
+  .dummy-card button:hover {
+    background: linear-gradient(to right, #43a047, #66bb6a);
+  }
+  

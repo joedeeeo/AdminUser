@@ -135,7 +135,7 @@
   <div class="dashboard-actions">
     <button class="edit-button" *ngIf="!editMode" (click)="editMode = true">Edit</button>
     <div *ngIf="editMode">
-      <button class="save-button" [disabled]="!selectedImageFile" (click)="saveUserData()">Save</button>
+      <button class="save-button" (click)="saveUserData()">Save</button>
       <button class="cancel-button" (click)="cancelEdit()">Cancel</button>
     </div>
   </div>

@@ -16,6 +16,7 @@ export class TableComponent implements OnInit {
   totalPages = 0;
   totalElements = 0;
   searchQuery: string = '';
+  selectedRole = 'USER'; 
 
   constructor(private router : Router, private userService: UserService) {}
 
@@ -29,7 +30,7 @@ export class TableComponent implements OnInit {
 }
 
   loadUsers(): void {
-    this.userService.getUserTable(this.page, this.size, this.searchQuery).subscribe({
+    this.userService.getUserTable(this.page, this.size, this.searchQuery,this.selectedRole).subscribe({
       next: (res: UserPageResponse) => {
         this.users = res.content;
         this.totalPages = res.totalPages;

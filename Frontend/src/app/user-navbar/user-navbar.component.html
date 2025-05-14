@@ -1,0 +1,19 @@
+<nav class="navbar">
+    <div class="container">
+      <!-- Logo / Branding -->
+      <div class="navbar-brand">
+        <a routerLink="/user-dashboard">MyUser</a>
+      </div>
+  
+      <!-- Navigation Links -->
+      <ul class="nav-links">
+        <li><a routerLink="/user-dashboard" routerLinkActive="active">Dashboard</a></li>
+      </ul>
+    
+        <!-- Logout Button -->
+      <div class="nav-actions">
+        <button (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </nav>
+  

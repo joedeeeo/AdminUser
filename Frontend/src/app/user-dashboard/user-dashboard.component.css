@@ -1,0 +1,289 @@
+/* .dashboard-card {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f7fbff, #e3f2fd);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid #dbeafe;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  color: #333;
+}
+
+.dashboard-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1e88e5;
+}
+
+.dashboard-image-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #bbdefb;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.initials-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #e0f7fa;
+  color: #00796b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.dashboard-info div {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+}
+
+.dashboard-info input,
+.dashboard-info select {
+  padding: 0.6rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 1rem;
+  margin-top: 0.25rem;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.dashboard-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+button {
+  padding: 0.6rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.edit-button {
+  background: linear-gradient(145deg, #c0e4ff, #a0d0ff);
+  color: #1e88e5;
+  box-shadow: 0 5px 12px rgba(30, 136, 229, 0.2);
+}
+
+.edit-button:hover {
+  background: linear-gradient(145deg, #b3dbf7, #95c9f7);
+}
+
+.save-button {
+  background: linear-gradient(to right, #81c784, #66bb6a);
+  color: #fff;
+  box-shadow: 0 5px 12px rgba(102, 187, 106, 0.25);
+}
+
+.save-button:disabled {
+  background: #c8e6c9;
+  color: #666;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.cancel-button {
+  background: linear-gradient(to right, #e57373, #ef5350);
+  color: #fff;
+  box-shadow: 0 5px 12px rgba(239, 83, 80, 0.25);
+}
+
+.dashboard-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.dashboard-info div {
+  flex: 1 1 calc(50% - 1rem);
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+}
+
+.dashboard-info strong {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.dashboard-info input,
+.dashboard-info select {
+  padding: 0.6rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 1rem;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+
+ */
+
+
+ .dashboard-card {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #1e1e2f, #12121c);
+    /* box-shadow: 8px 8px 16px #0e0e18, -8px -8px 16px #2e2e44; */
+    border: 1px solid #2c2c3e;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: #f0f0f0;
+  }
+  
+  .dashboard-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #00c3ff;
+  }
+  
+  .dashboard-image-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .dashboard-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #00c3ff;
+    box-shadow: 0 4px 12px rgba(0, 195, 255, 0.3);
+  }
+  
+  .initials-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #262636, #1a1a2a);
+    color: #00c3ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    box-shadow: inset 4px 4px 10px #12121c, inset -4px -4px 10px #2a2a3b;
+  }
+  
+  .dashboard-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+  }
+  
+  .dashboard-info div {
+    flex: 1 1 calc(50% - 1rem);
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+  }
+  
+  .dashboard-info strong {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #ccc;
+  }
+  
+  .dashboard-info input,
+  .dashboard-info select {
+    padding: 0.6rem;
+    border-radius: 10px;
+    border: none;
+    background-color: #262636;
+    color: #f0f0f0;
+    font-size: 1rem;
+    box-shadow: inset 2px 2px 4px #1a1a2a, inset -2px -2px 4px #33334d;
+    transition: all 0.3s ease;
+  }
+  
+  .dashboard-info input:focus,
+  .dashboard-info select:focus {
+    outline: none;
+    box-shadow: 0 0 8px #00f7ff88;
+  }
+  
+  .dashboard-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .dashboard-actions button {
+    padding: 0.6rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
+  .edit-button {
+    background: linear-gradient(145deg, #3a4b63, #2a3a50);
+    color: #00c3ff;
+    box-shadow: 0 5px 12px rgba(0, 195, 255, 0.2);
+  }
+  
+  .edit-button:hover {
+    background: linear-gradient(145deg, #325470, #27425b);
+  }
+  
+  .save-button {
+    background: linear-gradient(to right, #4caf50, #81c784);
+    color: #fff;
+    box-shadow: 0 5px 12px rgba(76, 175, 80, 0.25);
+  }
+  
+  .save-button:disabled {
+    background: #c8e6c9;
+    color: #666;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  
+  .cancel-button {
+    background: linear-gradient(to right, #e57373, #ef5350);
+    color: #fff;
+    box-shadow: 0 5px 12px rgba(239, 83, 80, 0.25);
+  }
+  
+  .cancel-button:hover {
+    background: linear-gradient(to right, #d64545, #d32f2f);
+  }
+  

@@ -1,0 +1,248 @@
+<app-navbar></app-navbar>
+<div class="add-user-wrapper">
+
+  <!-- STEP 1: Email check -->
+  <ng-container *ngIf="stage === 'email'">
+    <div class="email-check-card">
+      <label for="email">Enter Email:</label>
+      <input id="email" type="email" [(ngModel)]="emailToCheck" name="email" required />
+      <button (click)="onCheckEmail()">Check</button>
+      <div class="error" *ngIf="checkError">{{ checkError }}</div>
+    </div>
+  </ng-container>
+
+  <!-- STEP 2: Choice -->
+  <ng-container *ngIf="stage === 'choice'">
+    <div class="choice-card">
+      <h3>Email not found—what next?</h3>
+      <button (click)="chooseSingle()">Add Single User</button>
+      <button (click)="chooseBulk()">Add Multiple Users</button>
+    </div>
+  </ng-container>
+
+  <!-- STEP 3A: Single User Form -->
+  <ng-container *ngIf="stage === 'single'">
+    <div class="add-user-form-container">
+      <form #userForm="ngForm" (ngSubmit)="onSubmitSingle(userForm)" novalidate>
+        <div class="card">
+          <h2 class="card-title">Add User</h2>
+
+          <!-- name -->
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input id="name" name="name" required [(ngModel)]="newUser.name" #name="ngModel" />
+            <div *ngIf="name.invalid && name.touched" class="error">
+              Name is required
+            </div>
+          </div>
+
+          <!-- email -->
+          <div class="form-group">
+            <label for="email2">Email:</label>
+            <input id="email2" name="email2" type="email" required [(ngModel)]="newUser.email" #email2="ngModel" />
+            <div *ngIf="email2.invalid && email2.touched" class="error">
+              Valid email is required
+            </div>
+          </div>
+
+          <!-- dob -->
+          <div class="form-group">
+            <label for="dob">Date of Birth:</label>
+            <input id="dob" name="dob" type="date" required [(ngModel)]="newUser.dob" #dob="ngModel" />
+            <div *ngIf="dob.invalid && dob.touched" class="error">
+              Date of Birth is required
+            </div>
+          </div>
+
+          <!-- gender -->
+          <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required [(ngModel)]="newUser.gender" #gender="ngModel">
+              <option value="" disabled>Select gender</option>
+              <option value="MALE">Male</option>
+              <option value="FEMALE">Female</option>
+            </select>
+            <div *ngIf="gender.invalid && gender.touched" class="error">
+              Gender is required
+            </div>
+          </div>
+
+          <!-- pin code -->
+          <div class="form-group">
+            <label for="pinCode">Pin Code:</label>
+            <input id="pinCode" name="pinCode" type="number" required min="100000" [(ngModel)]="newUser.pinCode"
+              #pin="ngModel" />
+            <div *ngIf="pin.invalid && pin.touched" class="error">
+              Valid pin code is required
+            </div>
+          </div>
+
+          <!-- contact number -->
+          <div class="form-group">
+            <label for="contact">Contact Number:</label>
+            <input id="contact" name="contact" required pattern="^[0-9]{10}$" [(ngModel)]="newUser.contactNumber"
+              #contact="ngModel" />
+            <div *ngIf="contact.invalid && contact.touched" class="error">
+              Valid 10-digit number required
+            </div>
+          </div>
+
+          <!-- address -->
+          <div class="form-group">
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" required [(ngModel)]="newUser.address" #addr="ngModel"></textarea>
+            <div *ngIf="addr.invalid && addr.touched" class="error">
+              Address is required
+            </div>
+          </div>
+
+          <!-- password -->
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input id="password" name="password" type="password" required minlength="6" [(ngModel)]="newUser.password"
+              #pwd="ngModel" />
+            <div *ngIf="pwd.invalid && pwd.touched" class="error">
+              Password (min 6 characters) is required
+            </div>
+          </div>
+
+          <div class="button-container">
+            <button type="submit" class="adduser" [disabled]="userForm.invalid">
+              Add User
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-container>
+
+  <!-- STEP 3B: Bulk Upload -->
+  <ng-container *ngIf="stage === 'bulk'">
+    <!-- your bulk-upload UI component -->
+    <div class="bulk-container">
+
+      <!-- radio toggle, matching your screenshot -->
+      <div class="bulk-toggle">
+        <label>
+          <input type="radio" name="bulkOption" value="upload" [(ngModel)]="bulkOption" /> Bulk Upload
+        </label>
+        <!-- <label>
+          <input
+            type="radio"
+            name="bulkOption"
+            value="update"
+            [(ngModel)]="bulkOption"
+          /> Bulk Update
+        </label> -->
+      </div>
+
+      <div class="bulk-card">
+        <div class="bulk-header">
+          <h3>User Bulk Upload</h3>
+          <button (click)="downloadTemplate()">Download Template</button>
+        </div>
+
+        <p class="bulk-subtitle">
+          Kindly upload the File in given format(.xlsx, .csv, .tsv) to avoid errors while onboarding users.
+        </p>
+
+        <div class="file-zone" (drop)="false" (dragover)="false">
+          <input type="file" accept=".xlsx,.csv,.tsv" (change)="onFileSelected($event)" />
+          <div *ngIf="selectedFile" class="file-info">
+            <span>{{ selectedFile.name }}</span>
+          </div>
+        </div>
+        <button type="button" class="remove" (click)="removeFile()">Remove</button>
+        <!-- <span class="remove" (click)="removeFile()"><button>Remove</button></span> -->
+        <br>
+        <br>
+
+        <button class="upload-btn" [disabled]="!selectedFile" (click)="uploadFile()">
+          Upload File
+        </button>
+
+        <div *ngIf="uploadResult" class="result">
+          <p>Saved Users: {{ uploadResult.savedUsersCount }}</p>
+          <div *ngIf="uploadResult.errors.length">
+            <p><strong>Errors:</strong></p>
+            <ul>
+              <li *ngFor="let err of uploadResult.errors">{{ err }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+
+
+
+<!-- <app-navbar></app-navbar>
+
+<div class="add-user-form-container">
+  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)" novalidate>
+    <div class="card">
+      <h2 class="card-title">Add User</h2>
+
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input id="name" name="name" required [(ngModel)]="newUser.name" #name="ngModel" />
+        <div *ngIf="name.invalid && name.touched" class="error">Name is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input id="email" name="email" required email [(ngModel)]="newUser.email" #email="ngModel" />
+        <div *ngIf="email.invalid && email.touched" class="error">
+          Valid email is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required [(ngModel)]="newUser.dob" #dob="ngModel" />
+        <div *ngIf="dob.invalid && dob.touched" class="error">Date of Birth is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required [(ngModel)]="newUser.gender" #gender="ngModel">
+          <option value="" disabled>Select gender</option>
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+        </select>
+        <div *ngIf="gender.invalid && gender.touched" class="error">Gender is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="pinCode">Pin Code:</label>
+        <input id="pinCode" type="number" name="pinCode" required min="100000" [(ngModel)]="newUser.pinCode" #pinCode="ngModel" />
+        <div *ngIf="pinCode.invalid && pinCode.touched" class="error">Valid pin code is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="contactNumber">Contact Number:</label>
+        <input id="contactNumber" name="contactNumber" required pattern="^[0-9]{10}$" [(ngModel)]="newUser.contactNumber" #contactNumber="ngModel" />
+        <div *ngIf="contactNumber.invalid && contactNumber.touched" class="error">Valid 10-digit number required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" required [(ngModel)]="newUser.address" #address="ngModel"></textarea>
+        <div *ngIf="address.invalid && address.touched" class="error">Address is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required minlength="6" [(ngModel)]="newUser.password" #password="ngModel" />
+        <div *ngIf="password.invalid && password.touched" class="error">Password (min 6 characters) is required</div>
+      </div>
+
+      <div class="button-container">
+        <button type="submit" class="adduser" [disabled]="userForm.invalid">Add User</button>
+      </div>
+      
+    </div>
+  </form>
+</div> -->

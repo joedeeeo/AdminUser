@@ -1,9 +1,15 @@
 package com.example.exam.entity;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.example.exam.enums.Gender;
 import com.example.exam.enums.Role;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +18,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
@@ -52,7 +60,7 @@ public class AdminUser {
 	 
 	 private Date dob;
 	 
-	 @Enumerated(EnumType.STRING)
+	 @Enumerated(EnumType.ORDINAL)
 	 private Gender gender;
 	 
 	 @Positive
@@ -67,4 +75,15 @@ public class AdminUser {
 	 
 	 @Enumerated(EnumType.STRING)
 	 private Role role;
+	 
+	 private Boolean isActive;
+	 
+	 @CreationTimestamp
+	 @Column(updatable = false)
+	 private Timestamp createdDate;
+	 
+	 @UpdateTimestamp
+	 private Timestamp modifiedDate;
+
+
 }

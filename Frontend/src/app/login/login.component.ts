@@ -103,25 +103,68 @@ export class LoginComponent implements OnInit{
     });
   }
 
+  // onSubmit(): void {
+  //   this.submitted = true;
+
+  //   if (this.loginForm.invalid) return;
+
+  //   if (!this.captchaToken) {
+  //     alert("Please complete the CAPTCHA before submitting.");
+  //     return;
+  //   }
+
+  //   this.loading = true;
+
+  //   const loginData: LoginRequest = this.loginForm.value;
+  //   this.authService.login(loginData).subscribe({
+  //     next: (response) => {
+  //       console.log('Login success:', response);
+  //       localStorage.setItem('jwt', response.jwt);
+  //       localStorage.setItem('email', loginData.email);
+  //       this.router.navigate(['/dashboard']);
+  //       this.loading = false;
+  //     },
+  //     error: (error) => {
+  //       alert("Login Failed");
+  //       console.error('Login error:', error);
+  //       this.loading = false;
+  //     }
+  //   });
+  // }
   onSubmit(): void {
     this.submitted = true;
-
+  
     if (this.loginForm.invalid) return;
-
+  
     if (!this.captchaToken) {
       alert("Please complete the CAPTCHA before submitting.");
       return;
     }
-
+  
     this.loading = true;
-
+  
     const loginData: LoginRequest = this.loginForm.value;
+  
     this.authService.login(loginData).subscribe({
       next: (response) => {
         console.log('Login success:', response);
-        localStorage.setItem('jwt', response.jwt);
-        localStorage.setItem('email', loginData.email);
-        this.router.navigate(['/dashboard']);
+  
+        if (response && response.jwt && response.role) {
+          localStorage.setItem('jwt', response.jwt);
+          localStorage.setItem('email', loginData.email);
+          localStorage.setItem('role', response.role);
+  
+          if (response.role === 'ADMIN') {
+            this.router.navigate(['/dashboard']);
+          } else if (response.role === 'USER') {
+            this.router.navigate(['/user-dashboard']);
+          } else {
+            alert("Unauthorized role.");
+          }
+        } else {
+          alert("Invalid login response.");
+        }
+  
         this.loading = false;
       },
       error: (error) => {
@@ -131,4 +174,8 @@ export class LoginComponent implements OnInit{
       }
     });
   }
+  
+
 }
+
+

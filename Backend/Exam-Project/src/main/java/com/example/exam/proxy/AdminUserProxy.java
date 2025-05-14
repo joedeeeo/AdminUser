@@ -1,6 +1,8 @@
 package com.example.exam.proxy;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import com.example.exam.enums.Gender;
 import com.example.exam.enums.Role;
@@ -13,6 +15,7 @@ import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,13 +33,15 @@ public class AdminUserProxy {
 	 @NotNull
 	 private Date dob;
 	 
-	 @NotNull @Enumerated(EnumType.STRING)
+	 @NotNull
 	 private Gender gender;
 	 
 	 @NotNull @Positive
 	 private Long pinCode;
 	 
 	 private byte[] profileImage;
+	 
+	 private String password;
 	 
 	 @NotBlank
 	 private String contactNumber;
@@ -47,5 +52,25 @@ public class AdminUserProxy {
 	 @NotNull @Enumerated(EnumType.STRING)
 	 private Role role;
 	 
+	 private Boolean isActive;
 	 
+	 private Timestamp createdDate;
+	 
+	 @JsonProperty("formattedCreatedDate")
+	 public String getFormattedCreatedDate() {
+	     if (createdDate != null) {
+	         return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(createdDate);
+	     }
+	     return null;
+	 }
+	 
+	 private Timestamp modifiedDate;
+	 
+	 @JsonProperty("formattedModifiedDate")
+	 public String getFormattedModifiedDate() {
+	     if (createdDate != null) {
+	         return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(modifiedDate);
+	     }
+	     return null;
+	 }
 }

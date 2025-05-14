@@ -58,7 +58,7 @@ public class AuthUserDetailsServiceImpl implements UserDetailsService{
 			}
 		};
 		// TODO Auto-generated method stub
-		System.err.println(userDetail.getUsername());
+//		System.err.println(userDetail.getUsername());
 		return userDetail;
 	}
 

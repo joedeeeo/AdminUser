@@ -1,7 +1,7 @@
 // src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 export interface LoginRequest {
   email: string;
@@ -27,18 +27,28 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  // login(credentials: LoginRequest): Observable<LoginResponse> {
+  //   return this.http.post<LoginResponse>(this.baseUrl+'/login', credentials);
+  // }
   login(credentials: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(this.baseUrl+'/login', credentials);
+    return this.http.post<any>(this.baseUrl + '/login', credentials).pipe(
+      map(response => response.data as LoginResponse)
+    );
   }
 
-  sendResetPasswordEmail(email: string): Observable<string> {
-    return this.http.get(`${this.baseUrl}/send-reset-password-mail/${email}`, { responseType: 'text' });
-  }
+  // Send Reset Password Email - returns token or success message
+sendResetPasswordEmail(email: string): Observable<string> {
+  return this.http.get<any>(`${this.baseUrl}/send-reset-password-mail/${email}`).pipe(
+    map(response => response.data as string)
+  );
+}
 
-  // Method to reset the password
-  resetPassword(request: ResetPasswordRequest): Observable<boolean> {
-    return this.http.post<boolean>(`${this.baseUrl}/reset-password`, request);
-  }
+// Reset Password - returns boolean
+resetPassword(request: ResetPasswordRequest): Observable<boolean> {
+  return this.http.post<any>(`${this.baseUrl}/reset-password`, request).pipe(
+    map(response => response.data as boolean)
+  );
+}
 
 
 }

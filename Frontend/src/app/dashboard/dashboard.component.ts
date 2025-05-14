@@ -152,18 +152,42 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  saveUserData() {
-    if (!this.userData) return;
+  // saveUserData() {
+  //   console.log('Saving user data', this.userData, this.selectedImageFile);
+  //   if (!this.userData) return;
 
-    this.userService.updateUserData(this.userData, this.selectedImageFile!).subscribe({
+  //   this.userService.updateUserData(this.userData, this.selectedImageFile!).subscribe({
+  //     next: () => {
+  //       this.editMode = false;
+  //       this.selectedImageFile = null;
+  //       this.loadUserData(this.email!); // Reload updated data
+  //     },
+  //     error: (err) => console.error('Failed to update user data:', err)
+  //   });
+  // }
+
+  saveUserData() {
+    console.log('Saving user data', this.userData, this.selectedImageFile);
+  
+    // Ensure userData exists before proceeding
+    if (!this.userData) {
+      console.error('No user data to save');
+      return;
+    }
+  
+    // Call updateUserData with image file if it exists
+    this.userService.updateUserData(this.userData, this.selectedImageFile || undefined).subscribe({
       next: () => {
-        this.editMode = false;
-        this.selectedImageFile = null;
-        this.loadUserData(this.email!); // Reload updated data
+        this.editMode = false; // Exit edit mode
+        this.selectedImageFile = null; // Clear selected image after saving
+        this.loadUserData(this.email!); // Reload updated user data
       },
-      error: (err) => console.error('Failed to update user data:', err)
+      error: (err) => {
+        console.error('Failed to update user data:', err);
+      }
     });
   }
+  
 
   cancelEdit() {
     this.editMode = false;

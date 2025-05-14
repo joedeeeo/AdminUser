@@ -2,26 +2,39 @@
 
 <div class="user-table-container">
 
-  <button (click)="downloadExcel()">Download Excel</button>
+  <!-- Controls Grouped: Download, Search, Role -->
+  <div class="controls-bar" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+    <button (click)="downloadExcel()">Download Excel</button>
 
-  <!-- Search Bar -->
-  <div class="search-bar">
-    <div class="search-wrapper">
-      <i class="fas fa-search search-icon"></i>
-      <input 
-        type="text" 
-        placeholder="Search by name or email..." 
-        [(ngModel)]="searchQuery"
-        (input)="onSearch()"
-      />
+    <!-- Search Bar -->
+    <div class="search-bar" style="margin: 0;">
+      <div class="search-wrapper">
+        <i class="fas fa-search search-icon"></i>
+        <input 
+          type="text" 
+          placeholder="Search by name or email..." 
+          [(ngModel)]="searchQuery"
+          (input)="onSearch()"
+        />
+      </div>
+    </div>
+
+    <!-- Role Filter -->
+    <div class="role-filter">
+      <label for="roleSelect">Role:</label>
+      <select id="roleSelect" [(ngModel)]="selectedRole" (change)="loadUsers()">
+        <option value="ADMIN">ADMIN</option>
+        <option value="USER">USER</option>
+      </select>
     </div>
   </div>
-  
+
   <h2 class="table-title">All User</h2>
   <div class="table-wrapper">
     <table class="styled-table">
       <thead>
         <tr>
+          <th>Sr.No</th>
           <th>Profile</th>
           <th>Name</th>
           <th>Email</th>
@@ -29,11 +42,14 @@
           <th>Gender</th>
           <th>Contact</th>
           <th>Address</th>
+          <th>CreatedDate</th>
+          <th>ModifiedDate</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users">
+        <tr *ngFor="let user of users; index as i">
+          <td>{{ i + 1 }}</td>
           <td>
             <div class="avatar-cell">
               <ng-container *ngIf="isValidBase64(user.profileImage); else initials">
@@ -56,6 +72,8 @@
           <td>{{ user.gender }}</td>
           <td>{{ user.contactNumber }}</td>
           <td>{{ user.address }}</td>
+          <td>{{ user.formattedCreatedDate }}</td>
+          <td>{{ user.formattedModifiedDate }}</td>
           <td>
             <div class="action-buttons">
               <button class="view-btn" (click)="viewProfile(user)">View</button>
@@ -91,3 +109,5 @@
       <span>entries (Total: {{ totalElements }})</span>
     </div>
   </div>
+
+</div>

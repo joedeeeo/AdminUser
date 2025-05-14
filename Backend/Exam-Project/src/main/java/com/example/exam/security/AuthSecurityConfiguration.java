@@ -30,7 +30,7 @@ public class AuthSecurityConfiguration {
 	public SecurityFilterChain securityFilterchain(HttpSecurity http) throws Exception {
 		http.csrf(c -> c.disable());
 		
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/login", "/add-dummy-data/**", "/send-reset-password-mail/**", "/reset-password").permitAll().requestMatchers("/**").hasAnyAuthority("ADMIN").anyRequest().authenticated());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/login", "/add-dummy-data/**", "/send-reset-password-mail/**", "/reset-password","/download-template","/check-email").permitAll().requestMatchers("/**").hasAnyAuthority("ADMIN","USER").anyRequest().authenticated());
 		
 //		http.formLogin(Customizer.withDefaults());
 		http.httpBasic(Customizer.withDefaults());

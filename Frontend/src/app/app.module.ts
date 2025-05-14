@@ -17,6 +17,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { AddUserComponent } from './add-user/add-user.component';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { UserNavbarComponent } from './user-navbar/user-navbar.component';
+import { AddBulkUserComponent } from './add-bulk-user/add-bulk-user.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,11 @@ import { MatButtonModule } from '@angular/material/button';
     TableComponent,
     NavbarComponent,
     ResetPasswordComponent,
-    ForgotPasswordDialogComponent
+    ForgotPasswordDialogComponent,
+    AddUserComponent,
+    UserDashboardComponent,
+    UserNavbarComponent,
+    // AddBulkUserComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,326 @@
+/* wrapper */
+.add-user-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px;
+}
+
+/* Step 1 & 2 cards */
+.email-check-card,
+.choice-card {
+  background: #1e1e2f;
+  padding: 20px;
+  border-radius: 8px;
+  color: #fff;
+  width: 400px;
+  text-align: center;
+}
+
+.email-check-card input {
+  width: calc(100% - 100px);
+  margin-right: 10px;
+}
+
+.email-check-card button,
+.choice-card button {
+  padding: 8px 16px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.error {
+  color: #f66;
+  margin-top: 8px;
+}
+
+/* reuse your existing single-user styles below… */
+.add-user-form-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.card {
+  width: 500px;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #1e1e2f, #12121c);
+  color: #fff;
+}
+
+.card-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.button-container button {
+  background: #00c3ff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .3s;
+}
+
+.button-container button:hover {
+  background: #009dcf;
+}
+
+.adduser {
+  background: linear-gradient(145deg, #3a4b63, #2a3a50);
+  color: #00c3ff;
+  box-shadow: 0 5px 12px rgba(0, 195, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background .3s;
+}
+
+.adduser:hover {
+  background: #2a3a50;
+}
+
+/* ───── Bulk Upload Styles ─────────────────────────── */
+
+.bulk-container {
+  width: 800px;
+  max-width: 100%;
+  margin-top: 30px;
+}
+
+.bulk-toggle {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.bulk-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
+.bulk-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.bulk-header h3 {
+  margin: 0;
+}
+
+.bulk-header button {
+  background: #00c3ff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.bulk-subtitle {
+  margin: 0 0 16px;
+  color: #666;
+}
+
+.file-zone {
+  border: 2px dashed #ccc;
+  border-radius: 6px;
+  padding: 24px;
+  text-align: center;
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.file-zone input[type="file"] {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.file-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: bold;
+}
+
+.remove button {
+  color: #d00;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.upload-btn {
+  background: #00c3ff;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.upload-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.result {
+  margin-top: 20px;
+  background: #f9f9f9;
+  padding: 16px;
+  border-radius: 6px;
+}
+
+.result p {
+  margin: 4px 0;
+}
+
+.result ul {
+  margin: 4px 0 0 16px;
+  padding: 0;
+}
+
+
+
+
+
+
+
+/* .add-user-form-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  
+  .card {
+    width: 500px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #1e1e2f, #12121c);
+    color: white;
+  }
+  
+  .card-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+
+
+  .adduser {
+    flex: 50%;
+    text-align: center;
+    background: linear-gradient(145deg, #3a4b63, #2a3a50);
+    color: #00c3ff;
+    box-shadow: 0 5px 12px rgba(0, 195, 255, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .button-container button {
+    background: #00c3ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .button-container button:hover {
+    background: #009dcf;
+  }
+  
+
+
+  
+  .adduser {
+    background: linear-gradient(145deg, #3a4b63, #2a3a50);
+    color: #00c3ff;
+    box-shadow: 0 5px 12px rgba(0, 195, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background 0.3s ease;
+  }
+  
+  .adduser:hover {
+    background: #2a3a50;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+   */

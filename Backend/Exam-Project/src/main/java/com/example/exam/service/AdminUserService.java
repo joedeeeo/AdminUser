@@ -2,6 +2,7 @@ package com.example.exam.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,9 +24,13 @@ public interface AdminUserService {
 	public List<AdminUserProxy> getAllUsersWithName(String name);
 	public Boolean addDummyData(Integer count);
 	public Boolean deleteUser(Long id);
-	Page<AdminUserProxy> getAllUsers(Pageable pageable, String search);
-	
+	Page<AdminUserProxy> getAllUsers(Pageable pageable, String search,String role);
+	public String addUser(AdminUserProxy adminProxy);
 	
 	void exportUsersToExcel(HttpServletResponse response);
 
+	
+	public Map<String, Object> uploadUsers(MultipartFile file);
+	public byte[] downloadExcelTemplate();
+//	public String checkEmail(String email);
 }
